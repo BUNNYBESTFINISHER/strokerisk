@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Risk Prediction</title>
+    <style>
+        /* ========== Reset and General Styling ========== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* ========== Header Styling ========== */
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        /* ========== Form Styling ========== */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        label {
+            font-size: 1rem;
+            color: #555;
+            margin-right: 10px;
+            flex: 1;
+            text-align: left;
+        }
+        
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            max-width: 200px; /* Limits input width */
+            flex: 2;
+        }
+        
+        input[type="text"]:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+            outline: none;
+        }
+        
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        
+        /* ========== Footer Link Styling ========== */
+        a {
+            color: #3498db;
+            text-decoration: none;
+            margin-top: 15px;
+            display: inline-block;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* ========== Responsive Design ========== */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+        
+            input[type="text"], input[type="submit"] {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+        #img{
+            width: 150px;
+            height: 80px;
+
+        }
+        .div{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+     
+        <div class="div">
+            <h1>Stroke Risk Prediction</h1>
+            <img id="img" src="gmrit.png" alt="not">
+        </div>
+        <form method="POST" action="/predict">
+            <div class="form-group">
+                <label for="male">Gender (1=Male, 0=Female):</label>
+                <input type="text" id="male" name="male">
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="text" id="age" name="age">
+            </div>
+            <div class="form-group">
+                <label for="education">Education (1=Undergraduate, 2=Graduate, etc.):</label>
+                <input type="text" id="education" name="education">
+            </div>
+            <div class="form-group">
+                <label for="currentSmoker">Current Smoker (1=Yes, 0=No):</label>
+                <input type="text" id="currentSmoker" name="currentSmoker">
+            </div>
+            <div class="form-group">
+                <label for="cigsPerDay">Cigarettes per Day:</label>
+                <input type="text" id="cigsPerDay" name="cigsPerDay">
+            </div>
+            <div class="form-group">
+                <label for="BPMeds">On Blood Pressure Medication (1=Yes, 0=No):</label>
+                <input type="text" id="BPMeds" name="BPMeds">
+            </div>
+            <div class="form-group">
+                <label for="prevalentStroke">History of Stroke (1=Yes, 0=No):</label>
+                <input type="text" id="prevalentStroke" name="prevalentStroke">
+            </div>
+            <div class="form-group">
+                <label for="prevalentHyp">History of Hypertension (1=Yes, 0=No):</label>
+                <input type="text" id="prevalentHyp" name="prevalentHyp">
+            </div>
+            <div class="form-group">
+                <label for="diabetes">Diabetes (1=Yes, 0=No):</label>
+                <input type="text" id="diabetes" name="diabetes">
+            </div>
+            <div class="form-group">
+                <label for="totChol">Total Cholesterol:</label>
+                <input type="text" id="totChol" name="totChol">
+            </div>
+            <div class="form-group">
+                <label for="sysBP">Systolic Blood Pressure:</label>
+                <input type="text" id="sysBP" name="sysBP">
+            </div>
+            <div class="form-group">
+                <label for="diaBP">Diastolic Blood Pressure:</label>
+                <input type="text" id="diaBP" name="diaBP">
+            </div>
+            <div class="form-group">
+                <label for="BMI">Body Mass Index:</label>
+                <input type="text" id="BMI" name="BMI">
+            </div>
+            <div class="form-group">
+                <label for="heartRate">Heart Rate:</label>
+                <input type="text" id="heartRate" name="heartRate">
+            </div>
+            <div class="form-group">
+                <label for="glucose">Glucose Level:</label>
+                <input type="text" id="glucose" name="glucose">
+            </div>
+            <div class="form-group">
+                <label for="TenYearCHD">10-Year CHD Risk (1=Yes, 0=No):</label>
+                <input type="text" id="TenYearCHD" name="TenYearCHD">
+            </div>
+            
+
+            <input type="submit" value="Predict Stroke Risk">
+        </form>
+    </div>
+</body>
+</html>
